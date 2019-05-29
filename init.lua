@@ -34,6 +34,7 @@ function notify.watch(args)
         if switch == "1" then
           existing_notify = naughty.notify({
             title = title,
+            icon = args.icon,
             width = args.width,
             height = args.height,
             position = "top_middle",
