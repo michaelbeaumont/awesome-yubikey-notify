@@ -15,7 +15,15 @@ function notify.watch(args)
   end
 
   local socket = socket_unix()
-  assert(socket:connect(socket_name))
+  local connected = socket:connect(socket_name)
+  if not connected then
+      existing_notify = naughty.notify({
+        title = "Yubikey notify initialization error",
+        preset = naughty.config.presets.critical,
+        text = "Couldn't connect to yubikey-touch-detector socket!",
+      })
+      return
+  end
   socket:settimeout(0)
   existing_notify = nil
 
